@@ -1,11 +1,11 @@
-import React, { useContext, useState } from "react";
-import { Modal, Button } from "@mantine/core";
-import { DatePicker } from "@mantine/dates";
-import { useMutation } from "react-query";
-import UserDetailContext from "../../context/UserDetailContext.js";
-import { bookVisit } from "../../utils/api.js";
-import { toast } from "react-toastify";
-import dayjs from "dayjs";
+import React, { useContext, useState } from 'react';
+import { Modal, Button } from '@mantine/core';
+import { DatePicker } from '@mantine/dates';
+import { useMutation } from 'react-query';
+import UserDetailContext from '../../context/UserDetailContext.js';
+import { bookVisit } from '../../utils/api.js';
+import { toast } from 'react-toastify';
+import dayjs from 'dayjs';
 const BookingModal = ({ opened, setOpened, email, propertyId }) => {
   const [value, setValue] = useState(null);
   const {
@@ -14,8 +14,8 @@ const BookingModal = ({ opened, setOpened, email, propertyId }) => {
   } = useContext(UserDetailContext);
 
   const handleBookingSuccess = () => {
-    toast.success("You have booked your visit", {
-      position: "bottom-right",
+    toast.success('You have booked your visit', {
+      position: 'bottom-right',
     });
     setUserDetails((prev) => ({
       ...prev,
@@ -23,14 +23,14 @@ const BookingModal = ({ opened, setOpened, email, propertyId }) => {
         ...prev.bookings,
         {
           id: propertyId,
-          date: dayjs(value).format("DD/MM/YYYY"),
         },
       ],
     }));
   };
 
   const { mutate, isLoading } = useMutation({
-    mutationFn: () => bookVisit(value, propertyId, email, token),
+    mutationFn: () =>
+      bookVisit(value, propertyId, 'abisheks.ec20@bitsathy.ac.in', token),
     onSuccess: () => handleBookingSuccess(),
     onError: ({ response }) => toast.error(response.data.message),
     onSettled: () => setOpened(false),
@@ -40,14 +40,11 @@ const BookingModal = ({ opened, setOpened, email, propertyId }) => {
     <Modal
       opened={opened}
       onClose={() => setOpened(false)}
-      title="Select your date of visit"
+      title="Book tickets"
       centered
     >
-      <div className="flexColCenter" style={{gap: "1rem"}}>
-        <DatePicker value={value} onChange={setValue} minDate={new Date()} />
-        <Button disabled={!value || isLoading} onClick={() => mutate()}>
-          Book visit
-        </Button>
+      <div className="flexColCenter" style={{ gap: '1rem' }}>
+        <Button onClick={() => mutate()}>Register Event</Button>
       </div>
     </Modal>
   );

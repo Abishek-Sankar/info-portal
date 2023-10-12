@@ -1,30 +1,30 @@
-import { Container, Modal, Stepper } from "@mantine/core";
-import React, { useState } from "react";
-import AddLocation from "../AddLocation/AddLocation";
-import { useAuth0 } from "@auth0/auth0-react";
-import UploadImage from "../UploadImage/UploadImage";
-import BasicDetails from "../BasicDetails/BasicDetails";
-import Facilities from "../Facilities/Facilities";
+import { Container, Modal, Stepper } from '@mantine/core';
+import React, { useState } from 'react';
+import AddLocation from '../AddLocation/AddLocation';
+import { useAuth0 } from '@auth0/auth0-react';
+import UploadImage from '../UploadImage/UploadImage';
+import BasicDetails from '../BasicDetails/BasicDetails';
+import Facilities from '../Facilities/Facilities';
 
 const AddPropertyModal = ({ opened, setOpened }) => {
   const [active, setActive] = useState(0);
   const { user } = useAuth0();
 
   const [propertyDetails, setPropertyDetails] = useState({
-    title: "",
-    description: "",
+    title: '',
+    description: '',
     price: 0,
-    country: "",
-    city: "",
-    address: "",
+    country: '',
+    city: '',
+    address: '',
     image: null,
     facilities: {
-      bedrooms: 0,
-      parkings: 0,
-      bathrooms: 0,
+      teamSize: 0,
     },
-    userEmail: user?.email,
+    userEmail: 'abisheks.ec20@bitsathy.ac.in',
   });
+
+  console.log(propertyDetails);
 
   const nextStep = () => {
     setActive((current) => (current < 4 ? current + 1 : current));
@@ -39,9 +39,9 @@ const AddPropertyModal = ({ opened, setOpened }) => {
       opened={opened}
       onClose={() => setOpened(false)}
       closeOnClickOutside
-      size={"90rem"}
+      size={'90rem'}
     >
-      <Container h={"40rem"} w={"100%"}>
+      <Container h={'40rem'} w={'100%'}>
         <Stepper
           active={active}
           onStepClick={setActive}
